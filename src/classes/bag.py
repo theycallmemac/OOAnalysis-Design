@@ -1,9 +1,9 @@
 class Bag:
     def __init__():
-        self.letters = []       # array of letters
+        self.letters = []           # array of letters
 
     def add():
-        pass                  # with rack
+        pass                        # with rack
 
     def remove():
         pass

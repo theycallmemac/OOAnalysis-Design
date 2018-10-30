@@ -1,6 +1,6 @@
 class Board:
     def __init__():
-        self.board = []     # matrix of Squares
+        self.board = []             # matrix of Squares
 
     def set():
         pass

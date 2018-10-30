@@ -1,11 +1,11 @@
 class Letter:
     def __init__():
-        self.id = True  # placeholder
-        self.char = a   # placeholder
-        self.score = 0  #placeholder
+        self.id = True              # placeholder
+        self.char = a               # placeholder
+        self.score = 0              # placeholder
 
     def set():
-        pass            # placeholder
+        pass                        # placeholder
 
     def get():
-        pass            # placeholder
+        pass                        # placeholder
