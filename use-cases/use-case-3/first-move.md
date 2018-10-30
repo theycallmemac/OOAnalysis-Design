@@ -1,6 +1,6 @@
 # First Move
 
-| __Use Case 2__ || First Move |
+| __Use Case 3__ || First Move |
 |:-----------------------------:|:-:|:-----------------------------------------:|
 | __Goal in Context__          || For the first player to make their move |
 | __Scope & Level__             || Global, System |

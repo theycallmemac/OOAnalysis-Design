@@ -1,6 +1,6 @@
 # Next players move
 
-| __Use Case 3__ || Next players move |
+| __Use Case 4__ || Next players move |
 |:-----------------------------:|:-:|:-----------------------------------------:|
 | __Goal in Context__          || For the next player to make a move |
 | __Scope & Level__             || Global, System |
