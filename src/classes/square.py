@@ -6,4 +6,5 @@ class Square:
         self.letter = None          # initially empty
         self.middle = False         # false for all but one
 
-    def 
+    def isMiddle():
+        return self.middle
