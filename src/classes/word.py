@@ -1,5 +1,6 @@
 class Word:
     def __init__():
+        self.id = 1         # placeholder
         self.score = 0      # score of letters
         self.letters = []   # type Square[]
 
