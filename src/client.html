@@ -1,11 +1,7 @@
-<script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.0.0/socket.io.js"></script>
 <script type="text/javascript" charset="utf-8">
-    var ip;
-    $.getJSON('http://ip.jsontest.com/?callback=?', function(data) {
-        ip = data.ip;
-    });
     var socket = io.connect('http://localhost:5000');
     socket.on('connect', function() {
-        socket.emit('my event', {data: 'I\'m connected from '});
+        socket.emit('my event', {data: 'I\'m connected!'});
     });
 </script>
