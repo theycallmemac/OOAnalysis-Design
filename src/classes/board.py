@@ -12,7 +12,6 @@ class Board:
 	"""
 
     def isValid(self, x, y):
-		validPosition = False
 	"""
         Checks x, y is valid coordinate.
 
@@ -20,7 +19,7 @@ class Board:
         @param y (int): Represents boards y axis (0 <= x <= 15).
         @return: Boolean
 	"""
-        return validPosition
+        pass
 
     def _set(self):
 	"""
@@ -38,4 +37,4 @@ class Board:
         @param self (Board):.
         @return: Board
 	"""
-        return self.board
+        pass
