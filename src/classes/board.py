@@ -1,15 +1,41 @@
 class Board:
-    def __init__():
+    def __init__(self):
         self.board = []             # matrix of Squares
 
-    def set():
-        pass
+    def update(self, x, y):
+	"""
+        Update the board after a valid move is played.
 
-    def get():
-        pass
+        @param x (int): Represents boards x axis (0 <= x <= 15).
+        @param y (int): Represents boards y axis (0 <= x <= 15).
+        @return: Void
+	"""
 
-    def update():
-        pass
+    def isValid(self, x, y):
+		validPosition = False
+	"""
+        Checks x, y is valid coordinate.
 
-    def isValidMove():
-        pass
+        @param x (int): Represents boards x axis (0 <= x <= 15).
+        @param y (int): Represents boards y axis (0 <= x <= 15).
+        @return: Boolean
+	"""
+        return validPosition
+
+    def _set(self):
+	"""
+        Updates board at end of players turn.
+
+        @param self (Board): Overwrites board with updated board.
+        @return: Void
+	"""
+
+
+    def get(self):
+	"""
+        Get board.
+
+        @param self (Board):.
+        @return: Board
+	"""
+        return self.board
