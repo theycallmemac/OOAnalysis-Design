@@ -39,7 +39,7 @@ class Letter:
         
         Sets score to a letter object
         
-        @param letterId: score to be assigned to a letter object
+        @param score: int score to be assigned to a letter object
         @return: void
         """
         
@@ -70,7 +70,7 @@ class Letter:
         Gets the letters score
         
         @param: None
-        @return: letters score
+        @return: letter score
         
         """
         pass
