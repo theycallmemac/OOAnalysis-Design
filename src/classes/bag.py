@@ -1,18 +1,47 @@
 class Bag:
-    def __init__():
+    def __init__(self):
         self.letters = []           # array of letters
 
-    def add():
-        pass                        # with rack
+    def add(self, letters): # with rack
+    """
+        Inherit letters from rack and add them to bag.
 
-    def remove():
+        @param letters (list): Length of list must be between 1 and 7.
+        @return: Void
+	"""                     
+
+    def remove(self):
+    """
+        Removes a letter from the bag at random.
+
+        @param:.
+        @return: list
+	"""
         pass
 
-    def isEmpty():
-        return not len(self.letters)
+    def isEmpty(self):
+    """
+        Checks if any letters remain in the bag.
 
-    def setBag():
+        @param:.
+        @return: Boolean
+	"""
         pass
 
-    def getBag():
+    def _set(self):
+    """
+        Updates bag.
+
+        @param self(Bag):.
+        @return: Void
+	"""
+        pass
+
+    def get(self):
+    """
+        Get bag.
+
+        @param self(Bag):.
+        @return: Bag
+	"""
         pass
