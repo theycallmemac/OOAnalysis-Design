@@ -1,4 +1,4 @@
-# Import flask and socket libraries
+#Import flask and socket libraries
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 
@@ -10,6 +10,7 @@ from classes.rack import Rack
 from classes.player import Player 
 from classes.word import Word 
 from classes.bag import Bag
+
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
