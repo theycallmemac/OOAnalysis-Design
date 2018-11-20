@@ -13,8 +13,6 @@ class Letter:
         
         """
         
-        pass
-    
     def _setId(self, letterId):
         self.letterId = letterId 
         """
@@ -24,8 +22,6 @@ class Letter:
         @param LetterId: id to be assigned to a letter object
         @return: void
         """
-        
-        return
     
     def _setChar(self, char):
         self.char = char
@@ -36,8 +32,6 @@ class Letter:
         @param char: char to be assigned to a letter object
         @return: void
         """
-        
-        return
     
     def _setScore(self, score):
         self.score = score
@@ -47,9 +41,7 @@ class Letter:
         
         @param score: int score to be assigned to a letter object
         @return: void
-        """
-        
-        pass    
+        """ 
     
     def getId(self):
         """
