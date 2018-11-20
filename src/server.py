@@ -23,20 +23,13 @@ def handle_message(message):
     print(message)
 
 @app.route('/')
-def start():
-    return "start"
+def index():
+    return "index"
 
-@app.route('/move')
-def move():
-    return "move" 
+@app.route('/game')
+def game():
+    return "game" 
 
-@app.route('/swap')
-def swap():
-    return "swap" 
-
-@app.route('/skip')
-def skip():
-    return "skip"
 
 if __name__ == '__main__':
     # Encapsulates the start up of the web server
