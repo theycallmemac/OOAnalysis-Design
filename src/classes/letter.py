@@ -1,5 +1,8 @@
 class Letter:
     def __init__(self, letterId, char, score):
+        self.letterId = letterId
+        self.char = char
+        self.score = score
         """
         Initializes the letter
         
@@ -12,7 +15,8 @@ class Letter:
         
         pass
     
-    def _setId(self, LetterId):
+    def _setId(self, letterId):
+        self.letterId = letterId 
         """
         
         Sets id to a letter object
@@ -21,9 +25,10 @@ class Letter:
         @return: void
         """
         
-        pass
+        return
     
     def _setChar(self, char):
+        self.char = char
         """
         
         Sets char to a letter object
@@ -32,9 +37,10 @@ class Letter:
         @return: void
         """
         
-        pass
+        return
     
     def _setScore(self, score):
+        self.score = score
         """
         
         Sets score to a letter object
@@ -53,7 +59,7 @@ class Letter:
         @return: letters id
         
         """
-        pass
+        return self.letterId
 
     def getChar(self):
         """
@@ -63,7 +69,7 @@ class Letter:
         @return: letters char
         
         """
-        pass
+        return self.char
 
     def getScore(self):
         """
@@ -73,5 +79,5 @@ class Letter:
         @return: letter score
         
         """
-        pass
+        return self.score
 
