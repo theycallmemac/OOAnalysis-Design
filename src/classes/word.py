@@ -1,17 +1,66 @@
 class Word:
-    def __init__():
-        self.id = 1                 # placeholder
-        self.score = 0              # score of letters
-        self.letters = []           # type Square[]
+    def __init__(self, id, letters, score):
+        """
+        Initialises Word object
 
-    def setScore():
-        pass                        # updates score to self
+        @param id:  id of the word 
+        @param letters: array of letters
+        @param score: score int
+        @return: void
+        """
+        pass
+    
+    def _setScore(self, score):
+        """
+        @param score : int score to be assigned to word object
+        @return: void
+        """
+        pass
 
-    def getScore():
-        pass                        # passes score to player
+    def getScore(self):
+        """
+        @params: none
+        @return: score int
+        """
+        pass
+    
+    def calcScore(self):
+        """
+        @params: none
+        @return: word score int
+        """
+        pass
 
-    def calcScore():
-        pass                        # calculates score of letters
+    def _setLetters(self, letters):
+        """
+        @param letters: array of letters
+        @return: void
+        """
+        pass
+    
+    def getLetters(self):
+        """
+        @params: none
+        @return: array of letters
+        """
+        pass
+    
+    def _setScore(self, score):
+        """
+        @param score: int score to be assigned to word
+        @return: void
+        """
+        pass
+    
+    def getScore(self):
+        """
+        @params: none
+        @return: score int
+        """
+        pass
 
-    def isValid():
-        pass                        # Check if in dictionary
+    def isValid(self, dictionary):
+        """
+        @param dictionary: dictionary of words which will be used to check if the word is valid
+        """
+        pass                       
