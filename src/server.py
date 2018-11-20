@@ -18,9 +18,12 @@ app.config['SECRET_KEY'] = 'secret!'
 
 socketio = SocketIO(app)
 
-@socketio.on('my event')
-def handle_message(message):
-    print(message)
+@socketio.on('onconnect')
+def handle_onconnect(message):
+	print(message)
+
+def handle_skip(code):
+	print(code)
 
 @app.route('/')
 def index():
