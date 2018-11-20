@@ -27,11 +27,11 @@ def handle_skip(code):
 
 @app.route('/')
 def index():
-    return "index"
+    return render_template("index.html")
 
 @app.route('/game')
 def game():
-    return "game" 
+    return render_template("game.html")
 
 
 if __name__ == '__main__':
