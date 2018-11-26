@@ -1,89 +1,23 @@
 from square import Square
+from word import Word
 
 class Board:
     def __init__(self):
-        self.board = [[Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],             # matrix of Squares
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square],
-                      [Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square,Square]
-                      ]
+        self.board = [[ "" for i in range (0,15) ] for j in range (0,15)]
 
 
 
-    def isValid(self, x1,y1, x2,y2):
+    def isValid(self, coord):
         """
-        Checks x, y is valid coordinate.
-        @param x (int): Represents boards x axis (0 <= x <= 15).
-        @param y (int): Represents boards y axis (0 <= x <= 15).
+        Checks coord is valid coordinates (within range (0-14)), checks coord is empty.
+        @param coord (x,y)
         @return: Boolean
         """
-        s = []
-        if self.onBoard(x1,y1):
-            return False
-        elif self.onBoard(x2,y2):
-            return False
-        if self.goVert(x1, x2):
-            #Interate down along the the Y since x is the same
-            #Start from the (x1,y1) down to (x2,y2)
-            for i,val in enumerate(self.board):
-                if i > x1 and val.getLetter() != "":
-                    #Build an array from the contents
-                    s.append(val.getLetter())
-                
-            #Compare contents to dic.txt
-            l2str = ''.join(s):
-            if l2str in dictionary.txt:
+        x,y = coord
+        if 0<=x and 15> x and 0<=y and 15>y:
+            if self.board[y][x] == "":
                 return True
-            else:
-                return False
-            #ifTrue
-            return True
-        
-        elif self.goHori(y1, y2):
-            #Interate down along the the Y since x is the same
-            #Start from the (x1,y1) down to (x2,y2)
-            for i in self.board:
-                for i,val in enumerate(self.board):
-                    if i > y1 and val.getLetter() != "":
-                        #Build an array from the contents
-                        s.append(val.getLetter())
-            #Build an array from the contents
-            #Compare contents to dic.txt
-            l2str = ''.join(s):
-            if l2str in dictionary.txt:
-                return True
-            else:
-                return False
-            #ifTrue
-            return True
-        return True
-
-    def goVert(self, x1, x2):
-        if x1 == x2:
-            return True
         return False
-    
-    def goHori(self, y1, y2):
-        if y1 == y2:
-            return True
-        return False
-
-    def onBoard(self, x, y):
-        if 15 < x or x < 0 or 15 < y or y < 0:
-            return False
-        return True
-
     def update(self, x1,y1,x2,y2): # Need to append string to board
         """
         Update the board after a valid move is played.
@@ -92,6 +26,7 @@ class Board:
         @return: Void
         """
         if self.isValid(x1, y1, x2, y2):
+            
             return self.board
 
     def _set(self, x1, y1, x2, y2):
