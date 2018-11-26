@@ -20,7 +20,7 @@ class Board:
                 return True
         return False
 
-    def tryMake(b, coord):
+    def tryMake(self, b, coord):
         x = coord[0]
         y = coord[1]
 
@@ -38,7 +38,7 @@ class Board:
             word +=b[y][i]
             i+=1
         word += b[y][i]
-        words.append(word)
+        words.append(Word(word))
 
         word = ""
         i=y
@@ -54,10 +54,10 @@ class Board:
             word += b[i][x]
             i+=1
         word +=b[i][x] 
-        words.append(word)
-        return words
+        words.append(Word(word))
+        return wordswordt
 
-    def placeLetters(input):
+    def placeLetters(self, input):
         """
         Places users letters and checks if a valid word exists
         @param tuple (letter,[x,y])
@@ -70,8 +70,8 @@ class Board:
         for t in input:
             boardC[t[1][0]][t[1][1]] = t[0]
         for t in input:
-            w = tryMake(boardC,t[1])
-            if w != []:
+            w = self.tryMake(boardC,t[1])
+            if w != ["",""]:
                 for wordt in w:
                     if wordt.isValid():
                         words.add(wordt)
@@ -80,30 +80,31 @@ class Board:
             for valid in valids:
                 self.update(valid)
             return words
+        else:
+            return False
 
-    def update(self, x1,y1,x2,y2): # Need to append string to board
+    def update(self, t):
         """
         Update the board after a valid move is played.
-        @param x (int): Represents boards x axis (0 <= x <= 15).
-        @param y (int): Represents boards y axis (0 <= x <= 15).
+        @param tuples [(letter,[x,y])].
         @return: Void
         """
-        if self.isValid(x1, y1, x2, y2):
-            
-            return self.board
+        x = t[1][1]
+        y = t[1][0]
+        self.board[x][y] = t[0]
+    
+    # def _set(self, x1, y1, x2, y2):
+    #     """
+    #     Updates board at end of players turn.
 
-    def _set(self, x1, y1, x2, y2):
-        """
-        Updates board at end of players turn.
-
-        @param self (Board): Overwrites board with updated board.
-        @return: Void
-        """
-        self.board = update(x1, y1, x2, y2)
+    #     @param self (Board): Overwrites board with updated board.
+    #     @return: Void
+    #     """
+    #     self.board = update(x1, y1, x2, y2)
 
 
     def get(self):
-	"""
+	    """
         Get board.
         @param self (Board):.
         @return: Board
