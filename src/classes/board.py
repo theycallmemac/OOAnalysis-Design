@@ -55,7 +55,7 @@ class Board:
             i+=1
         word +=b[i][x] 
         words.append(Word(word))
-        return wordswordt
+        return words
 
     def placeLetters(self, input):
         """
