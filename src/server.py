@@ -5,7 +5,6 @@ from flask_socketio import SocketIO
 # Import Game Classes
 from classes.board import Board
 from classes.letter import Letter
-from classes.square import Square
 from classes.rack import Rack 
 from classes.player import Player 
 from classes.word import Word 
