@@ -1,5 +1,5 @@
-from square import Square
-from word import Word
+from classes.square import Square
+
 import copy 
 
 class Board:
@@ -104,9 +104,4 @@ class Board:
 
 
     def get(self):
-	    """
-        Get board.
-        @param self (Board):.
-        @return: Board
-        """
         return self.board
