@@ -1,5 +1,12 @@
+import bag
+import rack
+import board
+
 class Player:
     def __init__(self, id, score, isTurn):
+        self.id = id
+        self.score = score
+        self.isTurn = False
         """
         Initializes the Player
 
@@ -8,9 +15,10 @@ class Player:
         @param isTurn: player turn state
         @return: none
         """
-        pass
 
-    def placeLetter(self, letter):
+
+    def placeLetter(self, letters, x, y):
+
         """
         Places letter on the board
 
@@ -21,16 +29,19 @@ class Player:
 
 
     def updateScore(self, score):
+        self.score = self.score + score
         """
         Updates the players score.
 
         @param: none
         @return: users new score
         """
-        pass
+        return self.score
 
 
     def passTurn(self):
+        self.isTurn = False
+        #need to add interaction with the server 
         """
         Passes turn to next player
 
@@ -40,7 +51,9 @@ class Player:
         pass
 
 
-    def swapLetters(self, letters):
+    def swapLetters(self, letters, bag):
+        bag.swap(rack, letters, bag)
+        
         """
         Swaps letters on the rack for letters in the bag
 
@@ -57,7 +70,7 @@ class Player:
         @param: none
         @return: player id
         """
-        pass
+        return self.getId
 
 
     def getScore(self):
@@ -67,7 +80,7 @@ class Player:
         @param: none
         @return: player score
         """
-        pass
+        return self.score
 
 
     def getIsTurn(self):
@@ -77,17 +90,17 @@ class Player:
         @param: none
         @return: player turn state
         """
-        pass
+        return self.isTurn
 
 
     def _setId(self, playerId):
+        self.id = playerId
         """
         Sets the player id.
 
         @param playerId: the id to be assigned to the player instance
         @return: void
         """
-        pass
 
 
     def _setScore(self, score):
@@ -97,7 +110,7 @@ class Player:
         @param score: the players score
         @return: void
         """
-        pass
+        self.score = score
 
 
     def _setIsTurn(self, isTurn):
@@ -107,4 +120,4 @@ class Player:
         @param isTurn: state of player turn
         @return: void
         """
-        pass
+        self.isTurn = isTurn
