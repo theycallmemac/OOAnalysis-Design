@@ -1,15 +1,21 @@
 #Import flask and socket libraries
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+import json
 
 # Import Game Classes
-from classes.board import Board
-from classes.letter import Letter
-from classes.rack import Rack 
-from classes.player import Player 
-from classes.word import Word 
-from classes.bag import Bag
+from src.classes.board import Board
+from src.classes.letter import Letter
+from src.classes.rack import Rack 
+from src.classes.player import Player 
+from src.classes.word import Word 
+from src.classes.bag import Bag
 
+
+board = Board()
+word = Word("2342")
+testw = Word("BOATED")
+connection_count = 0
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -19,10 +25,25 @@ socketio = SocketIO(app)
 
 @socketio.on('onconnect')
 def handle_onconnect(message):
+	global connection_count
+	connection_count += 1
 	print(message)
 
+@socketio.on('skip')
 def handle_skip(code):
-	print(code)
+	code = json.dumps(code)
+	code = json.loads(code)
+	print(board.board)
+
+@socketio.on('move')
+def handle_move(move):
+	move = json.dumps(move)
+	move = json.loads(move)
+	move_list = eval(move["val"])
+	print(type(move_list[0][1]))
+	board.placeLetters(move_list)
+	print(board.board)
+	socketio.emit('response', board.board)
 
 @app.route('/')
 def index():
@@ -30,7 +51,10 @@ def index():
 
 @app.route('/game')
 def game():
-    return render_template("game.html")
+	if connection_count >= 2:
+		print("REFUSED")
+		return "error.html"
+	return render_template("game.html")
 
 
 if __name__ == '__main__':

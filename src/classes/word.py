@@ -1,5 +1,7 @@
+import os
 class Word:
-    def __init__(self, id, letters, score):
+    DICTIONARY = set()
+    def __init__(self, word):
         """
         Initialises Word object
 
@@ -8,8 +10,18 @@ class Word:
         @param score: score int
         @return: void
         """
-        pass
-    
+        self.word = word
+        
+        if Word.DICTIONARY != "":
+            fileDir = os.path.dirname(os.path.realpath('__file__'))
+            filename = os.path.join(fileDir, './british-english.txt')
+            f = open(filename, 'r')
+            Word.DICTIONARY = set()
+            x = f.readlines()
+            for l in x:
+                Word.DICTIONARY.add(l.strip())
+            f.close()
+        
     def _setScore(self, score):
         """
         @param score : int score to be assigned to word object
@@ -59,8 +71,11 @@ class Word:
         """
         pass
 
-    def isValid(self, dictionary):
+    def isValid(self):
         """
         @param dictionary: dictionary of words which will be used to check if the word is valid
         """
-        pass                       
+        if self.word in Word.DICTIONARY:
+            return True
+        return False
+           
