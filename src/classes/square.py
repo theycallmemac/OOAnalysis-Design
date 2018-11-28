@@ -10,16 +10,20 @@ class Square:
         @param isMiddle: indicates whether or not the current square is in the centre of the board
         @return: void
         """
-        pass
+        self.x = x
+        self.y = y
+        self.letter = letter
+        self.score = score
+        self.isMiddle = isMiddle
 
-    def getX():
+    def getX(self):
         """
         Gets x co-ordinate of square
         
         @param: void
         @return: int
         """
-        pass
+        return self.x
 
     def _setX(x):
         """
@@ -28,7 +32,7 @@ class Square:
         @param x: x co-ordinate to be set
         @return: void
         """
-        pass
+       self.x = x 
 
     def getY():
         """
@@ -37,7 +41,7 @@ class Square:
         @param: void
         @return: int
         """
-        pass
+        return self.y 
 
     def _setY(y):
         """
@@ -46,58 +50,58 @@ class Square:
         @param y: y co-ordinate to be set
         @return: void
         """
-        pass
+        self.y = y
 
-    def getLetter():
+    def getLetter(self):
         """
         Gets letter value (if any) of a square
         
         @param: void
         @return: Letter
         """
-        pass
+        return self.letter
 
-    def _setLetter(letter):
+    def _setLetter(self, letter):
         """
         Sets letter value of a square
         
         @param letter: letter value to be set on current square
         @return: void
         """
-        pass
+        self.letter = letter
 
-    def getScore():
+    def getScore(self):
         """
         Gets score value (if any) of a square
         
         @param: void
         @return: int
         """
-        pass
+        return self.score
 
-    def _setScore(score):
+    def _setScore(self, score):
         """
         Sets score value of a square
         
         @param score: score value to be set on current square
         @return: void
         """
-        pass
+        self.score = score
 
-    def getMiddle():
+    def getMiddle(self):
         """
         Checks to see if square is in the centre of the board
         
         @param: void
         @return: bool
         """
-        pass
+        return self.isMiddle
 
-    def _setMiddle(square):
+    def _setMiddle(self, square):
         """
         Sets the centre of the board
         
         @param sqaure: sqaure to be set as centre
         @return: void
         """
-        pass
+        self.isMiddle = square.isMiddle # potentially incorrect 

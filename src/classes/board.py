@@ -1,5 +1,6 @@
-from classes.square import Square
 
+from classes.square import Square
+from classes.word import Word
 import copy 
 
 class Board:
@@ -105,3 +106,4 @@ class Board:
 
     def get(self):
         return self.board
+
