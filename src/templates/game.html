@@ -2,10 +2,30 @@
 <html>
 <head>
 	<title>Scrabble</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.0.0/socket.io.js"></script>
 </head>
 <body>
-        <button>Make Move</button>
+        <input type="text" id="moveinput"><button onClick="move()">Make Move</button><br>
         <button>Swap Letters</button>
-        <button>Pass Turn</button>
+        <button  onClick="skip()">Pass Turn</button>
+        <script type="text/javascript" charset="utf-8">
+    		var socket = io.connect('http://localhost:5000');
+    		socket.on('connect', function() {
+        		socket.emit('onconnect', {data: 'I\'m connected!'});
+    		});
+
+    		function move() {
+    			val = "[" + document.getElementById('moveinput').value + "]";
+    			socket.emit('move', {val: val})
+    		}
+
+    		function skip() {
+    			socket.emit('skip', {code: 201})
+    		}
+
+    		socket.on('response', function(res) {
+    			console.log(res)
+    		})
+		</script>
 </body>
 </html>

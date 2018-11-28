@@ -1,15 +1,5 @@
 class Square:
     def __init__(self, x, y, letter, score, isMiddle):
-        """
-        Initialises Square object
-
-        @param x:  x co-ordinate of the square on the board
-        @param y:  y co-ordinate of the square of the board
-        @param letter: character of letter tile placed on a given square (can be empty)
-        @param score: multiplier associated with a given square
-        @param isMiddle: indicates whether or not the current square is in the centre of the board
-        @return: void
-        """
         self.x = x
         self.y = y
         self.letter = letter
@@ -19,7 +9,6 @@ class Square:
     def getX(self):
         """
         Gets x co-ordinate of square
-        
         @param: void
         @return: int
         """
@@ -28,11 +17,10 @@ class Square:
     def _setX(x):
         """
         Sets x co-ordinate of square
-        
         @param x: x co-ordinate to be set
         @return: void
         """
-       self.x = x 
+        self.x = x 
 
     def getY():
         """
