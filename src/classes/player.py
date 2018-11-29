@@ -3,10 +3,11 @@ from src.classes.rack import Rack
 from src.classes.board import Board 
 
 class Player:
-    def __init__(self, id, isTurn):
+    def __init__(self, id, isTurn, rack):
         self.id = id
         self.score = 0
         self.isTurn = isTurn
+        self.rack = rack
         """
         Initializes the Player
 

@@ -48,33 +48,33 @@ class Bag:
             @return: Void
         """
         self.letters = {                            # initial value
-        " " : (2, 0),
-        "E" : (12, 1),
-        "A" : (9, 1),
-        "I" : (9, 1),
-        "O" : (8, 1),
-        "N" : (6, 1),
-        "R" : (6, 1),
-        "T" : (6, 1),
-        "L" : (4, 1),
-        "S" : (4, 1),
-        "U" : (4, 1),
-        "D" : (4, 2),
-        "G" : (3, 2),
-        "B" : (2, 3),
-        "C" : (2, 3),
-        "M" : (2, 3),
-        "P" : (2, 3),
-        "F" : (2, 4),
-        "H" : (2, 4),
-        "V" : (2, 4),
-        "W" : (2, 4),
-        "Y" : (2, 4),
-        "K" : (1, 5),
-        "J" : (1, 8),
-        "X" : (1, 8),
-        "Q" : (1, 10),
-        "Z" : (1, 10),
+        " " : [2, 0],
+        "E" : [12, 1],
+        "A" : [9, 1],
+        "I" : [9, 1],
+        "O" : [8, 1],
+        "N" : [6, 1],
+        "R" : [6, 1],
+        "T" : [6, 1],
+        "L" : [4, 1],
+        "S" : [4, 1],
+        "U" : [4, 1],
+        "D" : [4, 2],
+        "G" : [3, 2],
+        "B" : [2, 3],
+        "C" : [2, 3],
+        "M" : [2, 3],
+        "P" : [2, 3],
+        "F" : [2, 4],
+        "H" : [2, 4],
+        "V" : [2, 4],
+        "W" : [2, 4],
+        "Y" : [2, 4],
+        "K" : [1, 5],
+        "J" : [1, 8],
+        "X" : [1, 8],
+        "Q" : [1, 10],
+        "Z" : [1, 10],
         }
 
 
@@ -93,22 +93,24 @@ class Bag:
             @return: list
         """
 
-        shuffle(LETTERS)                            # randomize letters
+        shuffle(Bag.LETTERS)                            # randomize letters
         true = True
         i = 0
         while true:
 
-            char = LETTERS[i]                       # assign random letter
-            if self.letters[char][0] > 0:           # if available letter
+            char = Bag.LETTERS[i]                     # assign random letter
+            meta = self.letters[char]
+            if meta[0] > 0:           # if available letter
 
-                score = self.letters[char][1]       # get score
+                score = meta[1]       # get score
                 letter_obj = Letter(char, score)    # make new Letter
 
-                self.letters[letter][0] -= 1        # decrement availability
+                meta = self.letters[char]
+                self.letters[char] = [meta[0]-1, meta[1]]        # decrement availability
                 true = False                        # break loop
             else:
                 i += 1                              # try again
-            return letter_obj
+        return letter_obj
 
     def swap(letters):
         """ Implements both _add and _remove

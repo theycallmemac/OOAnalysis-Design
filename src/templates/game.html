@@ -12,7 +12,12 @@
         <script type="text/javascript" charset="utf-8">
     		var id, isTurn;
     		var setup = false;
+    		var rack = [];
     		var socket = io.connect('http://localhost:5000');
+
+
+
+    		
     		socket.on('connect', function() {
         		socket.emit('onconnect', {data: 'I\'m connected!'});
     		});
@@ -24,6 +29,7 @@
     			if (setup == false){
     				id = res[0];
     				isTurn = res[1];
+    				rack = res[2];
     				if (isTurn == false){
     					document.getElementById("movebutton").disabled = false;
     					document.getElementById("swapbutton").disabled = false;
@@ -34,14 +40,14 @@
     					document.getElementById("passbutton").disabled = true;
     				}
     				setup = true;
-    				console.log(id);	
+    				console.log(id, rack);	
     			} 
     			
     		})
 
     		function move() {
     			val = "[" + document.getElementById('moveinput').value + "]";
-    			socket.emit('move', {val: val})
+    			socket.emit('move', {val: val, id: id})
     		}
 
     		function skip() {
@@ -50,6 +56,10 @@
 
     		socket.on('moveresponse', function(res) {
     			console.log(res);
+    			if (res[1] == id) {
+    				rack = res[2];
+    			}
+    			console.log(rack)
     			moveButton = document.getElementById("movebutton")
     			swapButton = document.getElementById("swapbutton")
     			passButton = document.getElementById("passbutton")

@@ -1,5 +1,5 @@
 class Rack:
-    def __init__(self, id, letters):
+    def __init__(self, letters):
         """
         Initialises Rack object
 
@@ -7,7 +7,6 @@ class Rack:
         @params letters: array of letters currently in the Racl
         @return: void
         """
-        self.id = id
         self.letters = letters
     
     def getId(self):
