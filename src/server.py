@@ -10,11 +10,26 @@ from src.classes.rack import Rack
 from src.classes.player import Player 
 from src.classes.word import Word 
 from src.classes.bag import Bag
+from copy import deepcopy
 
+
+
+def init_racks():
+	global racks
+	global bag
+	for x in range(2):
+		letters = []
+		for i in range(7):
+			letters.append(bag._remove())
+		new_rack = Rack(letters)
+		racks.append(new_rack)
+		print(new_rack.toArray())
 
 board = Board()
-word = Word("2342")
-testw = Word("BOATED")
+bag = Bag()
+racks = []
+init_racks()
+word = Word("INITIALIZECLASSVARIABLES")
 connection_count = 0
 players = []
 
@@ -27,12 +42,13 @@ socketio = SocketIO(app)
 @socketio.on('onconnect')
 def handle_onconnect(message):
 	global connection_count
+	global racks
 	if len(players) == 2:
 		return render_template("error.html")
 	print("COUNT", connection_count)
-	new_player = Player(connection_count, getTurn())
+	new_player = Player(connection_count, getTurn(), racks[connection_count])
 	players.append(new_player)
-	socketio.emit('idset', [new_player.id, new_player.isTurn])
+	socketio.emit('idset', [new_player.id, new_player.isTurn, new_player.rack.toArray()])
 	connection_count += 1
 	print(message)
 
@@ -66,17 +82,49 @@ def handle_skip(code):
 	code = json.loads(code)
 	print(board.board)
 
+@socketio.on('swap')
+def handle_swap(req):
+	global bag
+	req = json.dumps(req)
+	req = json.loads(req)
+	p_id = req["id"]
+	p_rack = req["rack"]
+	players[p_id].rack.swap(p_rack, bag)
+	swapTurn()
+	socketio.emit('swapresponse', [players[p_id].id, players[p_id].rack.toArray(), players[0].isTurn, players[1].isTurn])
+
+
+def update_rack(player, movelist):
+	global bag
+	rack = player.rack
+	chars = []
+	from_bag = []
+	for x in range(len(movelist)):
+		if not bag.isEmpty():
+			from_bag.append(bag._remove())
+	for move in movelist:
+		chars.append(move[0])
+	for char in chars:
+		if char in rack.toArray():
+			rack.removeLetter(char)
+	for letter in from_bag:
+		rack.add(letter)
+	player.rack = rack
+
 @socketio.on('move')
 def handle_move(move):
 	move = json.dumps(move)
 	move = json.loads(move)
 	move_list = eval(move["val"])
+	before_state = deepcopy(board.board)
 	print(type(move_list[0][1]))
-	board.placeLetters(move_list)
+	words = board.placeLetters(move_list)
+	if board.board != before_state:
+		update_rack(players[move["id"]], move_list)
 	print(board.board)
 	swapTurn()
 	#print(players[0].id, )
-	socketio.emit('moveresponse', [board.board, players[0].isTurn, players[1].isTurn])
+	socketio.emit('moveresponse', [board.board, players[move["id"]].id, players[move["id"]].rack.toArray(), players[0].isTurn, players[1].isTurn])
 
 @app.route('/')
 def index():
@@ -88,6 +136,8 @@ def game():
 		print("REFUSED")
 		return "error.html"
 	return render_template("game.html")
+
+
 
 
 if __name__ == '__main__':
