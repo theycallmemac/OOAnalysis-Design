@@ -1,11 +1,12 @@
-from square import Square
-from word import Word
+from src.classes.square import Square
+from src.classes.word import Word
 import copy 
 
 class Board:
     def __init__(self):
-        self.board = [[ "" for i in range (0,15) ] for j in range (0,15)]
-
+        self.board = [[ " " for i in range (0,15) ] for j in range (0,15)]
+        self.board[2][3] = "C"
+        self.board[5][3] = "T"
 
 
     def isValid(self, coord):
@@ -21,41 +22,43 @@ class Board:
         return False
 
     def tryMake(self, b, coord):
-        x = coord[0]
-        y = coord[1]
-
+        row = coord[0]
+        col = coord[1]
+        print(b)
         words = []
-        i = x
-        while b[y][i] != "" and i >= 0:
+        i = row
+        while b[row][i] != " " and i >= 0:
             i -= 1
         i+=1
         j=i
-        while b[y][j] != "" and j<15:
+        while b[row][j] != " " and j<15:
             j+=1
         j-=1
         word = ""
         while i<j:
-            word +=b[y][i]
+            word +=b[row][i]
             i+=1
-        word += b[y][i]
-        words.append(Word(word))
+        word += b[col][i]
+        if len(word) >= 2:
+            words.append(Word(word))
 
         word = ""
-        i=y
-        while b[i][x] != "" and i >=0: 
+        i=row
+        while b[i][col] != " " and i >=0: 
             i-=1
         i+=1
         j=i
-        while b[j][x] != "" and j < 15:
+        while b[j][col] != " " and j < 15:
             j+=1
         j-=1
         word=""
         while i <j:
-            word += b[i][x]
+            word += b[i][col]
             i+=1
-        word +=b[i][x] 
-        words.append(Word(word))
-        return wordswordt
+        word +=b[i][col]
+        if len(word) >= 2:
+            words.append(Word(word))
+        return words
 
     def placeLetters(self, input):
         """
@@ -66,7 +69,6 @@ class Board:
         words = set()
         valids= []
         boardC = copy.deepcopy(self.board) 
-
         for t in input:
             boardC[t[1][0]][t[1][1]] = t[0]
         for t in input:
@@ -76,11 +78,17 @@ class Board:
                     if wordt.isValid():
                         words.add(wordt)
                         valids.append(t)
-        if len(words) and len(valids) == len(input):
-            for valid in valids:
+        validlist = []
+        for i in range(len(valids)):
+            v = valids.pop()
+            if v not in validlist:
+                validlist.append(v)
+        if len(words) and len(validlist) == len(input):
+            for valid in validlist:
                 self.update(valid)
             return words
         else:
+            print(words)
             return False
 
     def update(self, t):
@@ -89,8 +97,8 @@ class Board:
         @param tuples [(letter,[x,y])].
         @return: Void
         """
-        x = t[1][1]
-        y = t[1][0]
+        x = t[1][0]
+        y = t[1][1]
         self.board[x][y] = t[0]
     
     # def _set(self, x1, y1, x2, y2):
@@ -104,9 +112,5 @@ class Board:
 
 
     def get(self):
-	    """
-        Get board.
-        @param self (Board):.
-        @return: Board
-        """
         return self.board
+

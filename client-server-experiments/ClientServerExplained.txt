@@ -1,0 +1,8 @@
+Explanation for Client server experiment:
+We plan to write our web server using Flask (Python) and by making use of Sockets
+to ensure that both players are kept "up to date" and seeing the same data i.e
+the board and the words on it.
+With socket Io messages are passed from client to server and back to the other client.
+We also plan to use a Restful API to get and update values from the server to the 
+client and back. This would occur when a player performs a certain action 
+for example swap letters on a rack or passing a turn.

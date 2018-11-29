@@ -1,20 +1,15 @@
 # Week 7 OO Analysis & Design Project Minutes
 
 __Week:__ 7
-
 __Start Date:__ 2018/11/06
-
 __Present:__ Jake, Martynas, Connor, James, and Michael
-
-__Excused:__ n/a
-
-__Absent:__ n/a
-
+__Excused:__ 
+__Absent:__
 __Remote:__ Michael (For the first portion)
 
 ___
 
-### Minutes
+## Minutes
 
 - Michael was selected to write minutes.
 - We reviewed previous additions and got started with the Refined Class Diagram.
@@ -39,6 +34,5 @@ ___
 - The rest of the diagram was completed and we committed everything to GitHub.
 - We spoke about what we have covered and were satisfied so far.
 - We theorized about what to do for our next meeting and wrapped things up.
-
 ___
 
