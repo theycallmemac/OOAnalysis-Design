@@ -1,9 +1,11 @@
+from src.classes.bag import Bag
+from src.classes.letter import Letter
+
 class Rack:
     def __init__(self, letters):
         """
         Initialises Rack object
 
-        @param id: id of Rack in the game
         @params letters: array of letters currently in the Racl
         @return: void
         """
@@ -45,6 +47,12 @@ class Rack:
         """    
         self.letters = letters
 
+    def toArray(self):
+        lst = []
+        for letter in self.letters:
+            lst.append(letter.char)
+        return lst
+
     def add(self, letter):
         """
         Adds a new letter from the bag to the rack
@@ -54,14 +62,18 @@ class Rack:
         """
         self.letters.append(letter)
 
-    def remove(self, letter):
+    def removeLetter(self, char):
         """
         Removes letter(s) from the rack 
 
-        @param letter: Letter(s) to be removed from the rack
+        @param char: Letter to be removed from the rack
         @return: void
-        """    
-        self.letters.remove(letter)
+        """  
+        for i, letter in enumerate(self.letters):
+            if letter.char == char:
+                break
+        self.letters.pop(i)
+            
 
     def isFull(self):
         """
