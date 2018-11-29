@@ -1,6 +1,5 @@
 class Letter:
-    def __init__(self, letterId, char, score):
-        self.letterId = letterId
+    def __init__(self, char, score):
         self.char = char
         self.score = score
         """
