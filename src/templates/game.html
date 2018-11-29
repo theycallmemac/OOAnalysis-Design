@@ -5,14 +5,39 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.0.0/socket.io.js"></script>
 </head>
 <body>
-        <input type="text" id="moveinput"><button onClick="move()">Make Move</button><br>
-        <button>Swap Letters</button>
-        <button  onClick="skip()">Pass Turn</button>
+        <input type="text" id="moveinput"><button onClick="move()" id="movebutton">Make Move</button><br>
+        <button id="swapbutton">Swap Letters</button>
+        <button  onClick="skip()" id="passbutton">Pass Turn</button>
+
         <script type="text/javascript" charset="utf-8">
+    		var id, isTurn;
+    		var setup = false;
     		var socket = io.connect('http://localhost:5000');
     		socket.on('connect', function() {
         		socket.emit('onconnect', {data: 'I\'m connected!'});
     		});
+
+
+
+    		socket.on('idset', function(res) {
+    			console.log(id, res);
+    			if (setup == false){
+    				id = res[0];
+    				isTurn = res[1];
+    				if (isTurn == false){
+    					document.getElementById("movebutton").disabled = false;
+    					document.getElementById("swapbutton").disabled = false;
+    					document.getElementById("passbutton").disabled = false;
+    				} else {
+    					document.getElementById("movebutton").disabled = true;
+    					document.getElementById("swapbutton").disabled = true;
+    					document.getElementById("passbutton").disabled = true;
+    				}
+    				setup = true;
+    				console.log(id);	
+    			} 
+    			
+    		})
 
     		function move() {
     			val = "[" + document.getElementById('moveinput').value + "]";
@@ -23,9 +48,25 @@
     			socket.emit('skip', {code: 201})
     		}
 
-    		socket.on('response', function(res) {
-    			console.log(res)
-    		})
+    		socket.on('moveresponse', function(res) {
+    			console.log(res);
+    			moveButton = document.getElementById("movebutton")
+    			swapButton = document.getElementById("swapbutton")
+    			passButton = document.getElementById("passbutton")
+    			console.log(id, moveButton.disabled)
+    			if (moveButton.disabled == true){
+    				moveButton.disabled = false;
+    				swapButton.disabled = false;
+    				passButton.disabled = false;
+
+    			} else {
+    				moveButton.disabled = true;
+    				swapButton.disabled = true;
+    				passButton.disabled = true;
+
+    			}
+    			console.log(id, moveButton.disabled)
+    		});
 		</script>
 </body>
 </html>

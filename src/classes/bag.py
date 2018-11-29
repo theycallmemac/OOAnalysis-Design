@@ -1,6 +1,6 @@
 from random import shuffle
 from string import ascii_uppercase
-import Letter from letter
+from src.classes.letter import Letter
 
 class Bag:
     LETTERS = list(ascii_uppercase)					# for random search

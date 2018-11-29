@@ -1,12 +1,12 @@
-import bag
-import rack
-import board
+from src.classes.bag import Bag 
+from src.classes.rack import Rack 
+from src.classes.board import Board 
 
 class Player:
-    def __init__(self, id, score, isTurn):
+    def __init__(self, id, isTurn):
         self.id = id
-        self.score = score
-        self.isTurn = False
+        self.score = 0
+        self.isTurn = isTurn
         """
         Initializes the Player
 
