@@ -47,6 +47,11 @@ def swapTurn():
 			player.isTurn = False
 			print(player.isTurn, player.id)
 
+@socketio.on('pass')
+def handle_pass(req):
+	socketio.emit('passresponse')
+	print("Passing Moves...")
+
 
 def getTurn():
 	global players
