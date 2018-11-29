@@ -6,7 +6,7 @@
 </head>
 <body>
         <input type="text" id="moveinput"><button onClick="move()" id="movebutton">Make Move</button><br>
-        <button id="swapbutton">Swap Letters</button>
+        <button id="swapbutton" onClick="swap()">Swap Letters</button>
         <button  onClick="pass()" id="passbutton">Pass Turn</button>
 
         <script type="text/javascript" charset="utf-8">
@@ -77,6 +77,33 @@
     			}
     			console.log(id, moveButton.disabled)
     		});
+
+
+    		function swap(){
+    			socket.emit('swap', {id: id, rack: rack})
+    		}
+
+    		socket.on("swapresponse", function(res) {
+    			if (res[0] == id){
+    				rack = res[1];
+    				console.log(rack)
+    			}
+    			moveButton = document.getElementById("movebutton")
+    			swapButton = document.getElementById("swapbutton")
+    			passButton = document.getElementById("passbutton")
+    			if (moveButton.disabled == true){
+    				moveButton.disabled = false;
+    				swapButton.disabled = false;
+    				passButton.disabled = false;
+
+    			} else {
+    				moveButton.disabled = true;
+    				swapButton.disabled = true;
+    				passButton.disabled = true;
+
+    			}
+    		})
+
 
     		function pass(){
     			socket.emit("pass", [])

@@ -21,9 +21,9 @@ def init_racks():
 		letters = []
 		for i in range(7):
 			letters.append(bag._remove())
-		print(letters)
 		new_rack = Rack(letters)
 		racks.append(new_rack)
+		print(new_rack.toArray())
 
 board = Board()
 bag = Bag()
@@ -82,6 +82,18 @@ def handle_skip(code):
 	code = json.loads(code)
 	print(board.board)
 
+@socketio.on('swap')
+def handle_swap(req):
+	global bag
+	req = json.dumps(req)
+	req = json.loads(req)
+	p_id = req["id"]
+	p_rack = req["rack"]
+	players[p_id].rack.swap(p_rack, bag)
+	swapTurn()
+	socketio.emit('swapresponse', [players[p_id].id, players[p_id].rack.toArray(), players[0].isTurn, players[1].isTurn])
+
+
 def update_rack(player, movelist):
 	global bag
 	rack = player.rack
@@ -94,7 +106,7 @@ def update_rack(player, movelist):
 		chars.append(move[0])
 	for char in chars:
 		if char in rack.toArray():
-			rack.removeletter(char)
+			rack.removeLetter(char)
 	for letter in from_bag:
 		rack.add(letter)
 	player.rack = rack
@@ -106,13 +118,13 @@ def handle_move(move):
 	move_list = eval(move["val"])
 	before_state = deepcopy(board.board)
 	print(type(move_list[0][1]))
-	board.placeLetters(move_list)
+	words = board.placeLetters(move_list)
 	if board.board != before_state:
 		update_rack(players[move["id"]], move_list)
 	print(board.board)
 	swapTurn()
 	#print(players[0].id, )
-	socketio.emit('moveresponse', [board.board, players[move["id"]], players[move["id"]].rack.toArray(), players[0].isTurn, players[1].isTurn])
+	socketio.emit('moveresponse', [board.board, players[move["id"]].id, players[move["id"]].rack.toArray(), players[0].isTurn, players[1].isTurn])
 
 @app.route('/')
 def index():
