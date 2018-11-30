@@ -36,3 +36,4 @@ If you want to place letters on the board to make a word, the format is `("Lette
 - eventlet
 - gevent
 - gevent-websocket
+- autopep8
