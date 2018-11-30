@@ -58,7 +58,9 @@ class Word:
         """
         score = 0
         for letter in self.word:
-            score += Letter.LETTER_SCORES[letter]
+            print("Letter", letter)
+            if letter != "_":
+                score += Letter.LETTER_SCORES[letter]
         return score
         
     

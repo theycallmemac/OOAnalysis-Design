@@ -5,8 +5,6 @@ import copy
 class Board:
     def __init__(self):
         self.board = [[ "_" for i in range (0,15) ] for j in range (0,15)]
-        self.board[2][3] = "C"
-        self.board[5][3] = "T"
 
 
     def isValid(self, coord):
@@ -17,7 +15,7 @@ class Board:
         """
         x,y = coord
         if 0<=x and 15> x and 0<=y and 15>y:
-            if self.board[y][x] == "":
+            if self.board[y][x] == "_":
                 return True
         return False
 
@@ -38,7 +36,8 @@ class Board:
         while i<j:
             word +=b[row][i]
             i+=1
-        word += b[col][i]
+        word += b[row][i]
+        print("IM IN HERE", word, i, j)
         if len(word) >= 2:
             words.append(Word(word))
 

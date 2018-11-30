@@ -152,13 +152,16 @@ def handle_move(move):
 	if move_end_state(players[move["id"]], move_list):
 		return render_template("winner.html")
 	before_state = deepcopy(board.board)
-	print(type(move_list[0][1]))
 	words = board.placeLetters(move_list)
 	if board.board != before_state:
 		update_rack(players[move["id"]], move_list)
-	players[move["id"]].updateScore(words)
-	swapTurn()
-	socketio.emit('moveresponse', [board.board, players[move["id"]].id, players[move["id"]].rack.toArray(), players[0].isTurn, players[1].isTurn])
+	if words == False:
+		swapTurn()
+		socketio.emit('moveresponse', [board.board, players[move["id"]].id, players[move["id"]].rack.toArray(), players[0].isTurn, players[1].isTurn])	
+	else:
+		players[move["id"]].updateScore(words)
+		swapTurn()
+		socketio.emit('moveresponse', [board.board, players[move["id"]].id, players[move["id"]].rack.toArray(), players[0].isTurn, players[1].isTurn])
 
 
 # Routes
