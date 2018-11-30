@@ -50,7 +50,9 @@ class Rack:
     def toArray(self):
         lst = []
         for letter in self.letters:
-            lst.append(letter.char)
+            print(letter)
+            if letter != False:
+                lst.append(letter.char)
         return lst
 
     def add(self, letter):

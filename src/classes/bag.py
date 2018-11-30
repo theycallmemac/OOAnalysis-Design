@@ -1,10 +1,12 @@
 from random import shuffle
 from string import ascii_uppercase
 from src.classes.letter import Letter
+import random
 
 class Bag:
     LETTERS = list(ascii_uppercase)					# for random search
     def __init__(self):
+        self.length = 100
         self.letters = {							# "l" : (ammount, points)
                         " " : (2, 0),
                         "E" : (12, 1),
@@ -92,12 +94,11 @@ class Bag:
             @param:.
             @return: list
         """
-
+        letter_obj = ""
         shuffle(Bag.LETTERS)                            # randomize letters
         true = True
         i = 0
-        while true:
-
+        while true and i < len(Bag.LETTERS):
             char = Bag.LETTERS[i]                     # assign random letter
             meta = self.letters[char]
             if meta[0] > 0:           # if available letter
@@ -107,10 +108,16 @@ class Bag:
 
                 meta = self.letters[char]
                 self.letters[char] = [meta[0]-1, meta[1]]        # decrement availability
+                self.length -= 1
                 true = False                        # break loop
             else:
                 i += 1                              # try again
-        return letter_obj
+
+
+        if letter_obj:
+            return letter_obj
+        self.length = 0
+        return False
 
     def swap(letters):
         """ Implements both _add and _remove
@@ -126,4 +133,4 @@ class Bag:
             @param:.
             @return: Boolean
         """
-        return not len(self.letters)                # 2eZ4mE
+        return self.length == 0

@@ -1,6 +1,7 @@
 from src.classes.bag import Bag 
 from src.classes.rack import Rack 
 from src.classes.board import Board 
+from src.classes.word import Word
 
 class Player:
     def __init__(self, id, isTurn, rack):
@@ -29,15 +30,17 @@ class Player:
         pass
 
 
-    def updateScore(self, score):
-        self.score = self.score + score
+    def updateScore(self, words):
         """
         Updates the players score.
 
         @param: none
         @return: users new score
         """
-        return self.score
+        score = 0
+        for word in words:
+            score += word.getScore()
+        self.score += score
 
 
     def passTurn(self):
