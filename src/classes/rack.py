@@ -9,7 +9,6 @@ class Rack:
         @params letters: array of letters currently in the Racl
         @return: void
         """
-        self.id = id
         self.letters = letters
     
     def getId(self):
@@ -88,7 +87,7 @@ class Rack:
         else:
             return False
         
-    def swap(self, letters, bagId):
+    def swap(self, letters, bag):
         """
         Swaps Letters from the Rack for Letters in the Bag
 
@@ -97,10 +96,8 @@ class Rack:
         @return: void
         """
         # This section is probably wrong
-        for letter in letters:
-            Rack.remove(letter)
-        
-        new_letters = Bag.getLetters()
-        i = 0
-        while not Rack.isFull():
-            Rack.add(new_letters[i])
+        new_rack = []
+        for x in range(len(letters)):
+            if not bag.isEmpty():
+                new_rack.append(bag._remove())
+        self.letters = new_rack
