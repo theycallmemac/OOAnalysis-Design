@@ -1,19 +1,5 @@
 # Week 10 OO Analysys & Design Projects Minutes
 
-__Week:__ 10 __Start Date:__ 2018/11/26 __Present:__ Connor, Michael, Jake, Martynas, James __Excused: Absent: Remote:__
-
-- Connor volunteered to take minutes.
-- Goals for the meeting is to get sockets and flask server working and flush out board class.
-- Jake and James researched flask/socketio and quickly implemented it into our server class.
-- Proceeded onto board class.
-- Rather than everyone coding we decided to do joint programming (reduce syntax errors and ensure valid logic).
-- Refactored board class.
-- Implemented core functions.
-- During implementation bugs arose but core logic is implemented.
-- Discussed and whiteboarded potential fixes and approaches for next meeting.
-
-# Week 10 OO Analysys & Design Projects Minutes
-
 __Week:__ 10 __Start Date:__ 2018/11/27 __Present:__ Connor, Jake, Martynas, James __Excused:__ Michael(3rd year project meeting) __Absent: Remote:__
 
 - Connor chosen to take minutes.
@@ -27,7 +13,7 @@ __Week:__ 10 __Start Date:__ 2018/11/27 __Present:__ Connor, Jake, Martynas, Jam
 
 # Week 10 OO Analysys & Design Projects Minutes
 
-__Week:__ 10 __Start Date:__ 2018/11/27 __Present:__ Connor, Michael, Jake, Martynas, James __Excused:__ __Absent: Remote:__
+__Week:__ 10 __Start Date:__ 2018/11/28 __Present:__ Connor, Michael, Jake, Martynas, James __Excused:__ __Absent: Remote:__
 
 - Minutes : Connor
 - Continued with yesterdays plan of getting the board class and sockets working.
@@ -48,3 +34,23 @@ __Week:__ 10 __Start Date:__ 2018/11/27 __Present:__ Connor, Michael, Jake, Mart
     - Pass, which lets the other player take their turn.
     - Swap Letter, completely updates players whole rack with letters in bag.
 - Our next goal is to render it outside of the browsers console and onto the web page.
+
+# Week 10 OO Analysys & Design Projects Minutes
+
+__Week:__ 10 __Start Date:__ 2018/11/29 __Present:__ Connor, Michael, Jake, Martynas, James __Excused:__ __Absent: Remote:__
+
+- Connor is doing the minutes today.
+- We wrote out the goals of the day which were to render the template for the game and to get the end game sorted.
+- We used flask render to a dynamic page that both players shared to an extent ie the board but not the wracks.
+- We used a bit of bootstrap too just the make it look a bit nicer.
+- We finally moved onto to sorting the end game state. This will happend on one of two events, either the bag is empty or one of the players reaches 100 points. This was a last minutes decision because we believed it added a bit of extra competition and excitement to the game.
+- End game sorted!
+- We now are rendering different templates for both winners and losers. (Ideas for losers: Rick Astley, Careless Whispers; Winners: A happy picture. Not important)
+- Resolving issues with flask refusing to render new templates.
+- Issue partially resolved, trying to avoid iframes since flask appears to not like them and may be settling for simple jpg's. 
+- Currently working on calculating scores.
+- Scores of valid words are now calculated.
+- Bug found with horizontal placement!!
+- Bug fixed, issue was row column were inverted...
+- Pushed & merged
+- Formatting files using PEP8.
