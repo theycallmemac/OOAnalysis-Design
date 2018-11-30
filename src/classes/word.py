@@ -1,21 +1,22 @@
 import os
 from src.classes.letter import Letter
+
+
 class Word:
     DICTIONARY = set()
 
     def __init__(self, word):
-
         """
         Initialises Word object
 
-        @param id:  id of the word 
+        @param id:  id of the word
         @param letters: array of letters
         @param score: score int
         @return: void
         """
         self.word = word
         self.score = self.getScore()
-        
+
         if Word.DICTIONARY != "":
             fileDir = os.path.dirname(os.path.realpath('__file__'))
             filename = os.path.join(fileDir, './british-english.txt')
@@ -25,11 +26,11 @@ class Word:
             for l in x:
                 Word.DICTIONARY.add(l.strip())
             f.close()
-        
+
         # self.id = id
         # self.letters = letters
         # self.score = score
-    
+
     # def _setId(self, id):
     #     """
     #     @param id : int word id
@@ -62,8 +63,7 @@ class Word:
             if letter != "_":
                 score += Letter.LETTER_SCORES[letter]
         return score
-        
-    
+
     # def calcScore(self):
     #     """
     #     @params: none
@@ -81,7 +81,7 @@ class Word:
     #     """
     #     for letter in letters:
     #         self.letters.append(letter)
-    
+
     # def getLetters(self):
     #     """
     #     @params: none
@@ -91,7 +91,7 @@ class Word:
 
     def isValid(self):
         """
-        @param dictionary: dictionary of words which will be used to check if the word is valid
+        @param dictionary: dictionary of words checked to be valid
         """
         if self.word in Word.DICTIONARY:
             return True

@@ -1,20 +1,20 @@
 from src.classes.square import Square
 from src.classes.word import Word
-import copy 
+import copy
+
 
 class Board:
     def __init__(self):
-        self.board = [[ "_" for i in range (0,15) ] for j in range (0,15)]
-
+        self.board = [["_" for i in range(0, 15)] for j in range(0, 15)]
 
     def isValid(self, coord):
         """
-        Checks coord is valid coordinates (within range (0-14)), checks coord is empty.
+        Checks coord is valid coordinates (within range (0-14)).
         @param coord (x,y)
         @return: Boolean
         """
-        x,y = coord
-        if 0<=x and 15> x and 0<=y and 15>y:
+        x, y = coord
+        if 0 <= x and 15 > x and 0 <= y and 15 > y:
             if self.board[y][x] == "_":
                 return True
         return False
@@ -27,34 +27,34 @@ class Board:
         i = row
         while b[row][i] != "_" and i >= 0:
             i -= 1
-        i+=1
-        j=i
-        while b[row][j] != "_" and j<15:
-            j+=1
-        j-=1
+        i += 1
+        j = i
+        while b[row][j] != "_" and j < 15:
+            j += 1
+        j -= 1
         word = ""
-        while i<j:
-            word +=b[row][i]
-            i+=1
+        while i < j:
+            word += b[row][i]
+            i += 1
         word += b[row][i]
         print("IM IN HERE", word, i, j)
         if len(word) >= 2:
             words.append(Word(word))
 
         word = ""
-        i=row
-        while b[i][col] != "_" and i >=0: 
-            i-=1
-        i+=1
-        j=i
+        i = row
+        while b[i][col] != "_" and i >= 0:
+            i -= 1
+        i += 1
+        j = i
         while b[j][col] != "_" and j < 15:
-            j+=1
-        j-=1
-        word=""
-        while i <j:
+            j += 1
+        j -= 1
+        word = ""
+        while i < j:
             word += b[i][col]
-            i+=1
-        word +=b[i][col]
+            i += 1
+        word += b[i][col]
         if len(word) >= 2:
             words.append(Word(word))
         return words
@@ -66,13 +66,13 @@ class Board:
         @return: set of valid words
         """
         words = set()
-        valids= []
-        boardC = copy.deepcopy(self.board) 
+        valids = []
+        boardC = copy.deepcopy(self.board)
         for t in input:
             boardC[t[1][0]][t[1][1]] = t[0]
         for t in input:
-            w = self.tryMake(boardC,t[1])
-            if w != ["",""]:
+            w = self.tryMake(boardC, t[1])
+            if w != ["", ""]:
                 for wordt in w:
                     if wordt.isValid():
                         words.add(wordt)
@@ -99,7 +99,7 @@ class Board:
         x = t[1][0]
         y = t[1][1]
         self.board[x][y] = t[0]
-    
+
     # def _set(self, x1, y1, x2, y2):
     #     """
     #     Updates board at end of players turn.
@@ -109,7 +109,5 @@ class Board:
     #     """
     #     self.board = update(x1, y1, x2, y2)
 
-
     def get(self):
         return self.board
-

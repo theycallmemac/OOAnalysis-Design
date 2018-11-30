@@ -1,7 +1,8 @@
-from src.classes.bag import Bag 
-from src.classes.rack import Rack 
-from src.classes.board import Board 
+from src.classes.bag import Bag
+from src.classes.rack import Rack
+from src.classes.board import Board
 from src.classes.word import Word
+
 
 class Player:
     def __init__(self, id, isTurn, rack):
@@ -18,9 +19,7 @@ class Player:
         @return: none
         """
 
-
     def placeLetter(self, letters, x, y):
-
         """
         Places letter on the board
 
@@ -28,7 +27,6 @@ class Player:
         @return: none
         """
         pass
-
 
     def updateScore(self, words):
         """
@@ -42,10 +40,9 @@ class Player:
             score += word.getScore()
         self.score += score
 
-
     def passTurn(self):
         self.isTurn = False
-        #need to add interaction with the server 
+        # need to add interaction with the server
         """
         Passes turn to next player
 
@@ -54,10 +51,9 @@ class Player:
         """
         pass
 
-
     def swapLetters(self, letters, bag):
         bag.swap(rack, letters, bag)
-        
+
         """
         Swaps letters on the rack for letters in the bag
 
@@ -65,7 +61,6 @@ class Player:
         @return: array of letters from the bag
         """
         pass
-
 
     def getId(self):
         """
@@ -76,7 +71,6 @@ class Player:
         """
         return self.getId
 
-
     def getScore(self):
         """
         Gets the player score
@@ -85,7 +79,6 @@ class Player:
         @return: player score
         """
         return self.score
-
 
     def getIsTurn(self):
         """
@@ -96,7 +89,6 @@ class Player:
         """
         return self.isTurn
 
-
     def _setId(self, playerId):
         self.id = playerId
         """
@@ -106,7 +98,6 @@ class Player:
         @return: void
         """
 
-
     def _setScore(self, score):
         """
         Sets the player score.
@@ -115,7 +106,6 @@ class Player:
         @return: void
         """
         self.score = score
-
 
     def _setIsTurn(self, isTurn):
         """

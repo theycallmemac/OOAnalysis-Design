@@ -3,39 +3,41 @@ from string import ascii_uppercase
 from src.classes.letter import Letter
 import random
 
+
 class Bag:
     LETTERS = list(ascii_uppercase)					# for random search
+
     def __init__(self):
         self.length = 100
         self.letters = {							# "l" : (ammount, points)
-                        " " : (2, 0),
-                        "E" : (12, 1),
-                        "A" : (9, 1),
-                        "I" : (9, 1),
-                        "O" : (8, 1),
-                        "N" : (6, 1),
-                        "R" : (6, 1),
-                        "T" : (6, 1),
-                        "L" : (4, 1),
-                        "S" : (4, 1),
-                        "U" : (4, 1),
-                        "D" : (4, 2),
-                        "G" : (3, 2),
-                        "B" : (2, 3),
-                        "C" : (2, 3),
-                        "M" : (2, 3),
-                        "P" : (2, 3),
-                        "F" : (2, 4),
-                        "H" : (2, 4),
-                        "V" : (2, 4),
-                        "W" : (2, 4),
-                        "Y" : (2, 4),
-                        "K" : (1, 5),
-                        "J" : (1, 8),
-                        "X" : (1, 8),
-                        "Q" : (1, 10),
-                        "Z" : (1, 10),
-                        }
+            " ": (2, 0),
+            "E": (12, 1),
+            "A": (9, 1),
+            "I": (9, 1),
+            "O": (8, 1),
+            "N": (6, 1),
+            "R": (6, 1),
+            "T": (6, 1),
+            "L": (4, 1),
+            "S": (4, 1),
+            "U": (4, 1),
+            "D": (4, 2),
+            "G": (3, 2),
+            "B": (2, 3),
+            "C": (2, 3),
+            "M": (2, 3),
+            "P": (2, 3),
+            "F": (2, 4),
+            "H": (2, 4),
+            "V": (2, 4),
+            "W": (2, 4),
+            "Y": (2, 4),
+            "K": (1, 5),
+            "J": (1, 8),
+            "X": (1, 8),
+            "Q": (1, 10),
+            "Z": (1, 10),
+        }
 
     def get(self):
         """ Get bag.
@@ -50,35 +52,34 @@ class Bag:
             @return: Void
         """
         self.letters = {                            # initial value
-        " " : [2, 0],
-        "E" : [12, 1],
-        "A" : [9, 1],
-        "I" : [9, 1],
-        "O" : [8, 1],
-        "N" : [6, 1],
-        "R" : [6, 1],
-        "T" : [6, 1],
-        "L" : [4, 1],
-        "S" : [4, 1],
-        "U" : [4, 1],
-        "D" : [4, 2],
-        "G" : [3, 2],
-        "B" : [2, 3],
-        "C" : [2, 3],
-        "M" : [2, 3],
-        "P" : [2, 3],
-        "F" : [2, 4],
-        "H" : [2, 4],
-        "V" : [2, 4],
-        "W" : [2, 4],
-        "Y" : [2, 4],
-        "K" : [1, 5],
-        "J" : [1, 8],
-        "X" : [1, 8],
-        "Q" : [1, 10],
-        "Z" : [1, 10],
+            " ": [2, 0],
+            "E": [12, 1],
+            "A": [9, 1],
+            "I": [9, 1],
+            "O": [8, 1],
+            "N": [6, 1],
+            "R": [6, 1],
+            "T": [6, 1],
+            "L": [4, 1],
+            "S": [4, 1],
+            "U": [4, 1],
+            "D": [4, 2],
+            "G": [3, 2],
+            "B": [2, 3],
+            "C": [2, 3],
+            "M": [2, 3],
+            "P": [2, 3],
+            "F": [2, 4],
+            "H": [2, 4],
+            "V": [2, 4],
+            "W": [2, 4],
+            "Y": [2, 4],
+            "K": [1, 5],
+            "J": [1, 8],
+            "X": [1, 8],
+            "Q": [1, 10],
+            "Z": [1, 10],
         }
-
 
     def _add(self, letters):							# input array of Letter obj
         """ Inherit letters from rack and add them to bag.
@@ -87,7 +88,7 @@ class Bag:
         """
         if 1 <= len(letters) and len(letters) <= 7:
             for letter in letters:
-                self.letters[letter.char][0] += 1	# add letter back to bag
+                self.letters[letter.char][0] += 1  # add letter back to bag
 
     def _remove(self):
         """ Removes a letter from the bag at random.
@@ -107,12 +108,12 @@ class Bag:
                 letter_obj = Letter(char, score)    # make new Letter
 
                 meta = self.letters[char]
-                self.letters[char] = [meta[0]-1, meta[1]]        # decrement availability
+                # decrement availability
+                self.letters[char] = [meta[0] - 1, meta[1]]
                 self.length -= 1
                 true = False                        # break loop
             else:
                 i += 1                              # try again
-
 
         if letter_obj:
             return letter_obj
