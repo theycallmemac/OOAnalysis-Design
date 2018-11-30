@@ -2,17 +2,60 @@
 <html>
 <head>
 	<title>Scrabble</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.0.0/socket.io.js"></script>
+	<style>
+		.board{
+			border-radius: 1px solid black;
+		}
+		table, th, td {
+   			border: 1px solid black;
+   			margin: 10px;
+   			padding-top:10px;
+   			padding-left: 15px;
+   			padding-right:15px;
+		}
+	</style>
 </head>
 <body>
-        <input type="text" id="moveinput"><button onClick="move()" id="movebutton">Make Move</button><br>
-        <button id="swapbutton" onClick="swap()">Swap Letters</button>
-        <button  onClick="pass()" id="passbutton">Pass Turn</button>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<table id="board_table" style="border-radius: 1px solid black;"></table>	
+				</div>
+				
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<input type="text" id="moveinput" class="form-control">
+				</div>
+				<div class="col-md-3">
+					<button class="btn btn-primary" onClick="move()" id="movebutton">Make Move</button>	
+				</div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-3">
+					<button id="swapbutton" class="btn btn-primary"  onClick="swap()">Swap Letters</button>
+				</div>
+				<div class="col-md-2">
+					<button  onClick="pass()"  class="btn btn-outline-primary" id="passbutton">Pass Turn</button>
 
+				</div>
+			</div>
+			<p id="rack"></p>
+		</div>
+		
+        
+        
+        
         <script type="text/javascript" charset="utf-8">
     		var id, isTurn;
     		var setup = false;
     		var rack = [];
+    		var board = [];
     		var socket = io.connect('http://localhost:5000');
 
 
@@ -22,7 +65,25 @@
         		socket.emit('onconnect', {data: 'I\'m connected!'});
     		});
 
-
+    		function render_board(board){
+    			let table = document.createElement('table');
+    			table.setAttribute("id", "bt");
+				//iterate over every array(row) within tableArr
+				for (let row of board) {
+				//Insert a new row element into the table element
+				  table.insertRow();
+				//Iterate over every index(cell) in each array(row)
+				  for (let cell of row) {
+				//While iterating over the index(cell)
+				//insert a cell into the table element
+				    let newCell = table.rows[table.rows.length - 1].insertCell();
+				//add text to the created cell element
+				    newCell.textContent = cell;
+				  }
+				}
+				//append the compiled table to the DOM
+				document.body.appendChild(table);
+    		}
 
     		socket.on('idset', function(res) {
     			console.log(id, res);
@@ -30,6 +91,10 @@
     				id = res[0];
     				isTurn = res[1];
     				rack = res[2];
+    				document.getElementById("rack").innerHTML = rack;
+    				render_board(res[3])
+
+    				//board = render_board(res[3]);
     				if (isTurn == false){
     					document.getElementById("movebutton").disabled = false;
     					document.getElementById("swapbutton").disabled = false;
@@ -45,6 +110,20 @@
     			
     		})
 
+    		socket.on("gameover", function(res){
+    			console.log(res)
+    			if (res[0] == id){
+    					document.getElementById("bt").style.display = "none";
+    				    var para = document.createElement("P");
+					    var t = document.createTextNode("You Win! Your score is " + res[1].toString());
+					    para.appendChild(t);
+					    document.body.appendChild(para);
+    			} else {
+    				window.location.href = 'https://media.giphy.com/media/MQI3HSyP6cL8Q/source.gif';
+    			}
+    			
+    		})
+
     		function move() {
     			val = "[" + document.getElementById('moveinput').value + "]";
     			socket.emit('move', {val: val, id: id})
@@ -56,8 +135,12 @@
 
     		socket.on('moveresponse', function(res) {
     			console.log(res);
+    			table = document.getElementById("bt")
+    			table.parentNode.removeChild(table)
+    			render_board(res[0])
     			if (res[1] == id) {
     				rack = res[2];
+    				document.getElementById("rack").innerHTML = rack;
     			}
     			console.log(rack)
     			moveButton = document.getElementById("movebutton")
@@ -87,6 +170,7 @@
     			if (res[0] == id){
     				rack = res[1];
     				console.log(rack)
+    				document.getElementById("rack").innerHTML = rack;
     			}
     			moveButton = document.getElementById("movebutton")
     			swapButton = document.getElementById("swapbutton")

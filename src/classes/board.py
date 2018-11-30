@@ -4,7 +4,7 @@ import copy
 
 class Board:
     def __init__(self):
-        self.board = [[ " " for i in range (0,15) ] for j in range (0,15)]
+        self.board = [[ "_" for i in range (0,15) ] for j in range (0,15)]
         self.board[2][3] = "C"
         self.board[5][3] = "T"
 
@@ -27,11 +27,11 @@ class Board:
         print(b)
         words = []
         i = row
-        while b[row][i] != " " and i >= 0:
+        while b[row][i] != "_" and i >= 0:
             i -= 1
         i+=1
         j=i
-        while b[row][j] != " " and j<15:
+        while b[row][j] != "_" and j<15:
             j+=1
         j-=1
         word = ""
@@ -44,11 +44,11 @@ class Board:
 
         word = ""
         i=row
-        while b[i][col] != " " and i >=0: 
+        while b[i][col] != "_" and i >=0: 
             i-=1
         i+=1
         j=i
-        while b[j][col] != " " and j < 15:
+        while b[j][col] != "_" and j < 15:
             j+=1
         j-=1
         word=""

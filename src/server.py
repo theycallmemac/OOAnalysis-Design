@@ -48,7 +48,7 @@ def handle_onconnect(message):
 	print("COUNT", connection_count)
 	new_player = Player(connection_count, getTurn(), racks[connection_count])
 	players.append(new_player)
-	socketio.emit('idset', [new_player.id, new_player.isTurn, new_player.rack.toArray()])
+	socketio.emit('idset', [new_player.id, new_player.isTurn, new_player.rack.toArray(), board.board])
 	connection_count += 1
 	print(message)
 
@@ -82,6 +82,15 @@ def handle_skip(code):
 	code = json.loads(code)
 	print(board.board)
 
+def get_top_score():
+	score = 0
+	winner = -1
+	for player in players:
+		if player.score >= score:
+			score = player.score
+			winner = player.id
+	return winner
+
 @socketio.on('swap')
 def handle_swap(req):
 	global bag
@@ -90,6 +99,10 @@ def handle_swap(req):
 	p_id = req["id"]
 	p_rack = req["rack"]
 	players[p_id].rack.swap(p_rack, bag)
+	if swap_end_state(p_rack):
+		print("EMTPY")
+		winner = get_top_score()
+		socketio.emit("gameover", [winner, players[winner].score])
 	swapTurn()
 	socketio.emit('swapresponse', [players[p_id].id, players[p_id].rack.toArray(), players[0].isTurn, players[1].isTurn])
 
@@ -101,7 +114,9 @@ def update_rack(player, movelist):
 	from_bag = []
 	for x in range(len(movelist)):
 		if not bag.isEmpty():
-			from_bag.append(bag._remove())
+			letter = bag._remove()
+			if letter != False:
+				from_bag.append(letter)
 	for move in movelist:
 		chars.append(move[0])
 	for char in chars:
@@ -111,17 +126,29 @@ def update_rack(player, movelist):
 		rack.add(letter)
 	player.rack = rack
 
+def move_end_state(player, moves):
+	global bag
+	print(len(moves), bag.length)
+	return len(moves) > bag.length
+
+def swap_end_state(rack):
+	global bag
+	return len(rack) > bag.length
+
 @socketio.on('move')
 def handle_move(move):
 	move = json.dumps(move)
 	move = json.loads(move)
 	move_list = eval(move["val"])
+	if move_end_state(players[move["id"]], move_list):
+		return render_template("winner.html")
 	before_state = deepcopy(board.board)
 	print(type(move_list[0][1]))
 	words = board.placeLetters(move_list)
 	if board.board != before_state:
 		update_rack(players[move["id"]], move_list)
 	print(board.board)
+	players[move["id"]].updateScore(words)
 	swapTurn()
 	#print(players[0].id, )
 	socketio.emit('moveresponse', [board.board, players[move["id"]].id, players[move["id"]].rack.toArray(), players[0].isTurn, players[1].isTurn])

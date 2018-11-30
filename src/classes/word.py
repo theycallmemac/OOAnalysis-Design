@@ -1,4 +1,5 @@
 import os
+from src.classes.letter import Letter
 class Word:
     DICTIONARY = set()
 
@@ -13,6 +14,7 @@ class Word:
         @return: void
         """
         self.word = word
+        self.score = self.getScore()
         
         if Word.DICTIONARY != "":
             fileDir = os.path.dirname(os.path.realpath('__file__'))
@@ -49,12 +51,16 @@ class Word:
     #     """
     #     self.score = score
 
-    # def getScore(self):
-    #     """
-    #     @params: none
-    #     @return: score int
-    #     """
-    #     return self.score
+    def getScore(self):
+        """
+        @params: none
+        @return: score int
+        """
+        score = 0
+        for letter in self.word:
+            score += Letter.LETTER_SCORES[letter]
+        return score
+        
     
     # def calcScore(self):
     #     """
