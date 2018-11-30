@@ -13,7 +13,7 @@ from src.classes.bag import Bag
 from copy import deepcopy
 
 
-
+# Initialize racks
 def init_racks():
 	global racks
 	global bag
@@ -23,8 +23,8 @@ def init_racks():
 			letters.append(bag._remove())
 		new_rack = Rack(letters)
 		racks.append(new_rack)
-		print(new_rack.toArray())
 
+#Initialize Everything
 board = Board()
 bag = Bag()
 racks = []
@@ -33,55 +33,59 @@ word = Word("INITIALIZECLASSVARIABLES")
 connection_count = 0
 players = []
 
+
+# Initialize Flask App
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.config['SECRET_KEY'] = 'secret!'
 
 socketio = SocketIO(app)
 
+
+# Player connection handler
 @socketio.on('onconnect')
 def handle_onconnect(message):
 	global connection_count
 	global racks
 	if len(players) == 2:
 		return render_template("error.html")
-	print("COUNT", connection_count)
 	new_player = Player(connection_count, getTurn(), racks[connection_count])
 	players.append(new_player)
 	socketio.emit('idset', [new_player.id, new_player.isTurn, new_player.rack.toArray(), board.board])
 	connection_count += 1
 	print(message)
 
+# Swapping handler
 def swapTurn():
 	global players
 	for player in players:
-		print("ATTEMPT", player.isTurn, player.id)
 		if player.isTurn == False:
 			player.isTurn = True
-			print(player.isTurn, player.id)
 		else:
 			player.isTurn = False
-			print(player.isTurn, player.id)
 
+
+#Pass Handler
 @socketio.on('pass')
 def handle_pass(req):
 	socketio.emit('passresponse')
-	print("Passing Moves...")
 
-
+# Turn Handler
 def getTurn():
 	global players
-	print("LEN", len(players))
 	if len(players) == 0:
 		return True
 	return False
 
+
+#Skip Handler
 @socketio.on('skip')
 def handle_skip(code):
 	code = json.dumps(code)
 	code = json.loads(code)
-	print(board.board)
 
+
+#Top score handler
 def get_top_score():
 	score = 0
 	winner = -1
@@ -91,6 +95,7 @@ def get_top_score():
 			winner = player.id
 	return winner
 
+#Swap Request Handler
 @socketio.on('swap')
 def handle_swap(req):
 	global bag
@@ -100,13 +105,13 @@ def handle_swap(req):
 	p_rack = req["rack"]
 	players[p_id].rack.swap(p_rack, bag)
 	if swap_end_state(p_rack):
-		print("EMTPY")
 		winner = get_top_score()
 		socketio.emit("gameover", [winner, players[winner].score])
 	swapTurn()
 	socketio.emit('swapresponse', [players[p_id].id, players[p_id].rack.toArray(), players[0].isTurn, players[1].isTurn])
 
 
+# Update Rack Handler
 def update_rack(player, movelist):
 	global bag
 	rack = player.rack
@@ -126,15 +131,19 @@ def update_rack(player, movelist):
 		rack.add(letter)
 	player.rack = rack
 
+
+# Checks for end state
 def move_end_state(player, moves):
 	global bag
-	print(len(moves), bag.length)
 	return len(moves) > bag.length
 
+# Checks for end state
 def swap_end_state(rack):
 	global bag
 	return len(rack) > bag.length
 
+
+# Move request handler
 @socketio.on('move')
 def handle_move(move):
 	move = json.dumps(move)
@@ -147,12 +156,12 @@ def handle_move(move):
 	words = board.placeLetters(move_list)
 	if board.board != before_state:
 		update_rack(players[move["id"]], move_list)
-	print(board.board)
 	players[move["id"]].updateScore(words)
 	swapTurn()
-	#print(players[0].id, )
 	socketio.emit('moveresponse', [board.board, players[move["id"]].id, players[move["id"]].rack.toArray(), players[0].isTurn, players[1].isTurn])
 
+
+# Routes
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -160,11 +169,8 @@ def index():
 @app.route('/game')
 def game():
 	if connection_count >= 2:
-		print("REFUSED")
 		return "error.html"
 	return render_template("game.html")
-
-
 
 
 if __name__ == '__main__':
