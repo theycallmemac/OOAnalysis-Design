@@ -13,8 +13,8 @@ After all this, you should be able to run the project.
 
 #### Using Flask Server
 To run the project:
-- Set the environable variable FLASK_APP using `FLASK_APP=server.py`
-- Run `flask run` to start up the server
+- Ensure your path is as follows: ../OOAnalysis-Design/src
+- Run the following command to start up the server: `FLASK_APP=server.py flask run`
 
 #### Using Docker
 Docker is not yet supported for this project.
