@@ -126,7 +126,18 @@
 
     		function move() {
     			val = "[" + document.getElementById('moveinput').value + "]";
-    			socket.emit('move', {val: val, id: id})
+				var isValid = false;
+				for(i = 0; i < val.length; i++){
+					if(rack.includes(val[i][0])){
+						isValid = true;
+					}
+				}
+				if(isValid){
+    				socket.emit('move', {val: val, id: id})
+				}else {
+					val="["+"]";
+					socket.emit('move', {val: val, id: id})
+				}
     		}
 
     		function skip() {
