@@ -1,5 +1,5 @@
-from src.classes.bag import Bag
-from src.classes.letter import Letter
+from classes.bag import Bag
+from classes.letter import Letter
 
 
 class Rack:

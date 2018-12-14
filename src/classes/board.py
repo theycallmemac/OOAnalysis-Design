@@ -1,5 +1,5 @@
-from src.classes.square import Square
-from src.classes.word import Word
+from classes.square import Square
+from classes.word import Word
 import copy
 
 

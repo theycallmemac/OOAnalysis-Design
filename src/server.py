@@ -4,12 +4,12 @@ from flask_socketio import SocketIO
 import json
 
 # Import Game Classes
-from src.classes.board import Board
-from src.classes.letter import Letter
-from src.classes.rack import Rack
-from src.classes.player import Player
-from src.classes.word import Word
-from src.classes.bag import Bag
+from classes.board import Board
+from classes.letter import Letter
+from classes.rack import Rack
+from classes.player import Player
+from classes.word import Word
+from classes.bag import Bag
 from copy import deepcopy
 
 

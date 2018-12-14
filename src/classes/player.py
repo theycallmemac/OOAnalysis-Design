@@ -1,7 +1,7 @@
-from src.classes.bag import Bag
-from src.classes.rack import Rack
-from src.classes.board import Board
-from src.classes.word import Word
+from classes.bag import Bag
+from classes.rack import Rack
+from classes.board import Board
+from classes.word import Word
 
 
 class Player:

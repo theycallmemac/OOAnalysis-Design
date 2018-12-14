@@ -1,7 +1,7 @@
-FROM python:3.7
-COPY . /app
+FROM python:3.6
 WORKDIR /app
-RUN pip install -r requirements.txt
-ENTRYPOINT ["python3"]
-CMD ["server.py"]
-
+ADD ./ /app
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+EXPOSE 5000
+ENV FLASK_APP=server.py
+CMD ["flask", "run", "--host=0.0.0.0"]

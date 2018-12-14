@@ -1,6 +1,6 @@
 from random import shuffle
 from string import ascii_uppercase
-from src.classes.letter import Letter
+from classes.letter import Letter
 import random
 
 
