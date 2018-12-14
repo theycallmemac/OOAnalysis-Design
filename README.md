@@ -16,11 +16,17 @@ To run the project:
 - Ensure your path is as follows: ../OOAnalysis-Design/src
 - Run the following command to start up the server: `FLASK_APP=server.py flask run`
 
-#### Using Docker
-Docker is not yet supported for this project.
-
-
 Once the server has been started, go to localhost:5000/game in your browser.
+
+#### Using Docker
+This project now supports Docker, but can only be used once you have switched over to the `docker` branch.
+
+To run the project using Docker:
+- Ensure you are on the correct branch by using `git checkout docker`
+- Ensure your path is as follows: ../OOAnalysis-Design/src
+- Run the following command to build the container: `docker build -t username/scrabble .`
+- Run the following command to run your container: `docker run -d --name scrabble -p 5000:5000 username/scrabble`
+- Once the server has been started, go to localhost:5000/game in your browser.
 
 ### Usage
 
