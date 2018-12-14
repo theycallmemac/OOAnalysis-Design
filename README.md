@@ -38,6 +38,7 @@ If you want to place letters on the board to make a word, the format is `("Lette
 ### Dependencies:
 
 - flask
+- flask-cors
 - flask-socketio
 - eventlet
 - gevent

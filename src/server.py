@@ -1,5 +1,6 @@
 # Import flask and socket libraries
 from flask import Flask, render_template
+from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO
 import json
 
@@ -37,6 +38,7 @@ players = []
 
 # Initialize Flask App
 app = Flask(__name__)
+CORS(app)
 app.config["DEBUG"] = True
 app.config['SECRET_KEY'] = 'secret!'
 
@@ -205,5 +207,5 @@ def game():
 
 
 if __name__ == '__main__':
-    # Encapsulates the start up of the web server
-    socketio.run(app, port="5000", host="0.0.0.0")
+    # Encapsulates the start up of the web serveri
+    socketio.run(app,port=5000,host='0.0.0.0')
